@@ -21,7 +21,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String COL2 = "AMOUNT";
     public static final String COL3 = "TYPE";
     public static final String COL4 = "NOTE";
-    public static final String COL5 = "DATE";
+    public static final String COL5 = "DATE";  // Date column
 
     public DatabaseHandler(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -29,7 +29,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT," + "AMOUNT TEXT," + "TYPE TEXT," + "NOTE TEXT," + "DATE TEXT)";
+        String createTable = "CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "AMOUNT TEXT,"
+                + "TYPE TEXT,"
+                + "NOTE TEXT,"
+                + "DATE TEXT)";
         db.execSQL(createTable);
     }
 
@@ -46,15 +50,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(COL2, amount);
         contentValues.put(COL3, type);
         contentValues.put(COL4, note);
-        contentValues.put(COL5, date);
+        contentValues.put(COL5, date);  // Store date as text
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
-        if (result == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        return result != -1;
     }
 
     public void update(String id, String amount, String type, String note, String date) {
@@ -63,12 +63,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(COL2, amount);
         contentValues.put(COL3, type);
         contentValues.put(COL4, note);
-        contentValues.put(COL5, date);
+        contentValues.put(COL5, date);  // Update date
 
-        long result = database.update(TABLE_NAME, contentValues, "id=?", new String[]{id});
-        if (result == -1) {
-        } else {
-        }
+        long result = database.update(TABLE_NAME, contentValues, "ID=?", new String[]{id});
+        // Handle result if needed
     }
 
     public List<incomeModel> getAllIncome() {
@@ -77,20 +75,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 
-        if (data.getCount() == 0) {
-
-        } else {
-            if (incomeModelList == null) {
-                incomeModelList = new ArrayList<>();
-            }
-
+        if (data.getCount() != 0) {
             while (data.moveToNext()) {
-                incomeModelList.add(new incomeModel(data.getString(0), data.getString(1), data.getString(2), data.getString(3), data.getString(4)));
+                // Adjust the constructor if necessary to accept the date field
+                incomeModelList.add(new incomeModel(
+                        data.getString(0),  // ID
+                        data.getString(1),  // AMOUNT
+                        data.getString(2),  // TYPE
+                        data.getString(3),  // NOTE
+                        data.getString(4)   // DATE
+                ));
             }
         }
 
         return incomeModelList;
     }
-
 
 }

@@ -43,7 +43,7 @@ public class incomeAdapter2 extends RecyclerView.Adapter<incomeAdapter2.viewhold
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
         incomeModel model = expenseModelList.get(position);
-        holder.tv_incomeAmount.setText("₹" + model.getAmount());
+        holder.tv_incomeAmount.setText("$" + model.getAmount());
         holder.tv_incomeType.setText(model.getType());
         holder.tv_incomeNote.setText(model.getNote());
 

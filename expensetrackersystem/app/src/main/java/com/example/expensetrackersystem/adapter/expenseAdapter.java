@@ -36,7 +36,7 @@ public class expenseAdapter extends RecyclerView.Adapter<expenseAdapter.viewhold
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
         expenseModel model = incomeModelList.get(position);
-        holder.tv_incomeAmount.setText("₹"+model.getAmount());
+        holder.tv_incomeAmount.setText("$"+model.getAmount());
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(Long.parseLong(model.getDate()));

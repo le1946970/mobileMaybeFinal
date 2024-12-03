@@ -104,7 +104,7 @@ public class Expense extends Fragment {
             total += Integer.parseInt(model.getAmount());
         }
         totalExpense = String.valueOf(total);
-        tvExpense.setText("₹" + totalExpense);
+        tvExpense.setText("$" + totalExpense);
 
         expenseAdapter = new expenseAdapter2(getContext(), expenseModelList, databaseHandlerExpense);
         rvExpense.setLayoutManager(new LinearLayoutManager(getContext()));

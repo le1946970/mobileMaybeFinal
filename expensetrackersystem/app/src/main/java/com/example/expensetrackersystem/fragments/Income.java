@@ -104,7 +104,7 @@ public class Income extends Fragment {
             total += Integer.parseInt(model.getAmount());
         }
         totalIncome = String.valueOf(total);
-        tvIncome.setText("₹" + totalIncome);
+        tvIncome.setText("$" + totalIncome);
 
         expenseAdapter = new incomeAdapter2(getContext(), incomeModelList, databaseHandler);
         rvIncome.setLayoutManager(new LinearLayoutManager(getContext()));

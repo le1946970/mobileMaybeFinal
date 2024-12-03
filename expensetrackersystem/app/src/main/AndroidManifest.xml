@@ -16,6 +16,9 @@
             android:name=".PieChart"
             android:exported="true" />
         <activity
+            android:name=".PieChartFull"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.example.expensetrackersystem.model.expenseModel;
-import com.example.expensetrackersystem.model.incomeModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,8 @@ public class DatabaseHandlerExpense extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT," + "AMOUNT TEXT," + "TYPE TEXT," + "NOTE TEXT," + "DATE TEXT)";
+        String createTable = "CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "AMOUNT TEXT," + "TYPE TEXT," + "NOTE TEXT," + "DATE TEXT)";
         db.execSQL(createTable);
     }
 
@@ -51,11 +51,7 @@ public class DatabaseHandlerExpense extends SQLiteOpenHelper {
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
-        if (result == -1) {
-            return false;
-        } else {
-            return true;
-        }
+        return result != -1;
     }
 
     public void update(String id, String amount, String type, String note, String date) {
@@ -66,31 +62,23 @@ public class DatabaseHandlerExpense extends SQLiteOpenHelper {
         contentValues.put(COL4, note);
         contentValues.put(COL5, date);
 
-        long result = database.update(TABLE_NAME, contentValues, "id=?", new String[]{id});
-        if (result == -1) {
-        } else {
-        }
+        database.update(TABLE_NAME, contentValues, "id=?", new String[]{id});
     }
 
     public List<expenseModel> getAllIncome() {
-        List<expenseModel> incomeModelList = new ArrayList<>();
+        List<expenseModel> expenseModels = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        while (cursor.moveToNext()) {
+            expenseModel expense = new expenseModel();
+            expense.setId(cursor.getString(0));
+            expense.setAmount(cursor.getString(1));
+            expense.setType(cursor.getString(2));
+            expense.setNote(cursor.getString(3));
+            expense.setDate(cursor.getString(4));
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-
-        if (data.getCount() == 0) {
-
-        } else {
-            if (incomeModelList == null) {
-                incomeModelList = new ArrayList<>();
-            }
-
-            while (data.moveToNext()) {
-                incomeModelList.add(new expenseModel(data.getString(0), data.getString(1), data.getString(2), data.getString(3), data.getString(4)));
-            }
+            expenseModels.add(expense);
         }
-
-        return incomeModelList;
+        return expenseModels;
     }
-
 }

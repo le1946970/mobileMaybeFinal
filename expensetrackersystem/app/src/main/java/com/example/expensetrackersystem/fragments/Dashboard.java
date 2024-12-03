@@ -1,11 +1,13 @@
 package com.example.expensetrackersystem.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.expensetrackersystem.DatabaseHandler;
 import com.example.expensetrackersystem.DatabaseHandlerExpense;
+import com.example.expensetrackersystem.PieChartFull;
 import com.example.expensetrackersystem.R;
 import com.example.expensetrackersystem.adapter.expenseAdapter;
 import com.example.expensetrackersystem.adapter.incomeAdapter;
@@ -40,6 +43,8 @@ public class Dashboard extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ImageView iv_expensePie;
 
     public Dashboard() {
         // Required empty public constructor
@@ -98,6 +103,13 @@ public class Dashboard extends Fragment {
 
         init(view);
 
+        iv_expensePie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), PieChartFull.class));
+            }
+        });
+
         databaseHandler = new DatabaseHandler(getContext());
         databaseHandlerExpense = new DatabaseHandlerExpense(getContext());
         fillIncomeModel();
@@ -150,7 +162,7 @@ public class Dashboard extends Fragment {
             total += Integer.parseInt(model.getAmount());
         }
         totalExpense = String.valueOf(total);
-        tv_expense.setText("₹" + totalExpense);
+        tv_expense.setText("$" + totalExpense);
 
         expenseAdapter = new expenseAdapter(getContext(), expenseModelList);
         rv_expense.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -167,7 +179,7 @@ public class Dashboard extends Fragment {
             total += Integer.parseInt(model.getAmount());
         }
         totalIncome = String.valueOf(total);
-        tv_income.setText("₹" + totalIncome);
+        tv_income.setText("$" + totalIncome);
 
         incomeAdapter = new incomeAdapter(getContext(), incomeModelList);
         rv_income.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -299,6 +311,8 @@ public class Dashboard extends Fragment {
         addExpenseText.setVisibility(View.GONE);
 
         isAllFabsVisible = false;
-    }
 
+        iv_expensePie = root.findViewById(R.id.iv_expensePie);
+        databaseHandler = new DatabaseHandler(getContext());
+    }
 }
