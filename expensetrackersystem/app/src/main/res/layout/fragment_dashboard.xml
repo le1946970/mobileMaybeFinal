@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/white"
     tools:context=".fragments.Dashboard">
 
     <TextView
@@ -13,8 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
-        android:text="ProjectGurukul"
-        android:textColor="@color/white"
+        android:text="Expense App"
+        android:textColor="@color/black"
+        android:background="@color/white"
         android:textSize="32sp" />
 
     <TextView
@@ -22,19 +23,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_text"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp"
-        android:text="Dashboard"
-        android:textColor="@color/white"
-        android:textSize="28sp" />
+        android:textColor="@color/black"/>
 
     <LinearLayout
         android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_text2"
-        android:background="@color/black"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:weightSum="2">
 
@@ -48,7 +44,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/bungee_inline"
                 android:text="Income"
                 android:textColor="@color/light_green"
                 android:textSize="24sp" />
@@ -57,7 +52,7 @@
                 android:id="@+id/tv_income"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rs. 10000.00"
+                android:text="10000.00"
                 android:textColor="@color/light_green"
                 android:textSize="24sp" />
 
@@ -73,7 +68,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/bungee_inline"
                 android:text="Expense"
                 android:textColor="@color/light_red"
                 android:textSize="24sp" />
@@ -82,7 +76,7 @@
                 android:id="@+id/tv_expense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rs. 10000.00"
+                android:text="10000.00"
                 android:textColor="@color/light_red"
                 android:textSize="24sp" />
 
@@ -92,7 +86,7 @@
 
     <TextView
         android:id="@+id/tvInc"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rl"
         android:layout_marginLeft="10dp"
@@ -103,7 +97,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_income"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvInc"
         android:layout_marginTop="8dp"
@@ -112,7 +106,7 @@
 
     <TextView
         android:id="@+id/tvExp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rv_income"
         android:layout_marginLeft="10dp"
@@ -123,7 +117,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_expense"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvExp"
         android:layout_marginTop="8dp"
@@ -133,7 +127,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_fab"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
